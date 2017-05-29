@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>FOS-Streaming panel by Tyfix</title>
+    <title>Xtream Panel</title>
 
     <!-- Bootstrap core CSS -->
 
@@ -100,8 +100,8 @@ if (isset($_POST['submit'])) {
                         <div>
 
 
-                            <p>&copy;2015 All Rights Reserved FOS-Streaming by <a href="http://www.tyfix.nl"
-                                                                                  target="_blank">Tyfix</a></p>
+                            <p>&copy;2017 All Rights Reserved Xtream Panel by <a href="http://www.facebook.com/celiojr94"
+                                                                                  target="_blank">Célio Junior</a></p>
                         </div>
                     </div>
                 </form>
