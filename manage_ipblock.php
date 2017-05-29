@@ -13,20 +13,20 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    $error = 0;
+    $errorr = 0;
     $exists = BlockedIp::where('ip', '=', $_POST['ip'])->get();
     if (empty($_POST['ip'])) {
         $message['type'] = "error";
-        $message['message'] = "ip field cannot be empty";
-        $error = 1;
+        $message['message'] = "O campo IP não pode estar em branco";
+        $errorr = 1;
     }
 
-    if ($error == 0) {
-        $message['type'] = "success";
+    if ($errorr == 0) {
+        $message['type'] = "Successo";
         if (isset($_GET['id'])) {
-            $message['message'] = "ipblock edited";
+            $message['message'] = "ipblock editado";
         } else {
-            $message['message'] = "ipblock Created";
+            $message['message'] = "ipblock criado";
         }
 
 

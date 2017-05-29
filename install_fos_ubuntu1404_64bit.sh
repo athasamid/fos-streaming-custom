@@ -6,28 +6,28 @@ if [ -f /etc/lsb-release ]; then
     . /etc/lsb-release
         if [ $DISTRIB_ID == Ubuntu ]; then
             if [ $DISTRIB_RELEASE != "14.04" ]; then
-                error
+                errorr
             fi
         else
-            error
+            errorr
         fi
 fi
 }
 
-# FUNCTION: ERROR
-error(){
+# FUNCTION: errorR
+errorr(){
     sleep 2
-    echo -ne '\n'"--PROBLEM!--"
-    echo -ne '\n'"Support: https://github.com/zgelici/FOS-Streaming-v1" '\n'
+    echo -ne '\n'"--PROBLEMA!--"
+    echo -ne '\n'"Suporte: http://www.facebook.com/celiojr94" '\n'
 exit
 }
 
 
-# FUNCTION: FOS-Streaming Exist
+# FUNCTION: Xtream Panel Exist
 fosstreamingexist() {
     if [ -d "/home/fos-streaming" ]; then
-      echo -ne '\n'"You have already installed fos streaming before?"
-      echo "If you want remove fos-streaming"
+      echo -ne '\n'"Voce ja instalou o Xtream Panel !"
+      echo "Para remove-lo use os seguintes comandos:"
       echo "killall -9 nginx php-fpm"
       echo  "userdel fosstreaming"
       echo "rm -r /home/fos-streaming"
@@ -220,25 +220,22 @@ foswebport-streamport()
     /bin/ln -s /home/fos-streaming/fos/www/playlist.php /home/fos-streaming/fos/www1/playlist.php
  }   
 info(){
- echo "********************************************************************************************;
-    echo "FOS-Streaming installed.. \n";
-    echo "streaming port   page: 'http://host:8000' \n";
-    echo "visit management page: 'http://host:7777' \n";
-    echo "Login: \n";
-    echo "Username: admin \n";
-    echo "Password: admin \n";
-    echo "database details: \n";
-    echo  "hostname: localhost, database_name: " $1 " , database_username: "  $2  " , database_password " $3
-    echo "IMPORTANT: After you logged in, go to settings and check your ip-address. \n";
+    clear
+    echo "********************************************************************************************;
+    echo "Xtream Panel instalado com sucesso... \n";
+    echo "Pagina inicial: 'http://host:7777' \n";
+    echo "Usuario: admin \n";
+    echo "Senha: admin \n";
+    echo "IMPORTANTE: Depois de iniciar a sessão, aceda as definicoes e verifique o endereço IP. \n";
     echo "*****************************************************************************************;
 }
 
 database(){
 
 echo ""
-read -p "Choose your MySQL database name: " sqldatabase
-read -p "Enter your MySQL username(usual 'root'): " sqluname
-read -rep $'Enter your MySQL password (ENTER for none):' sqlpasswd
+read -p "Escolha o nome do banco de dados MySQL: " sqldatabase
+read -p "Digite seu nome de usuário MySQL ('root'): " sqluname
+read -rep $'Digite sua senha MySQL (ENTER para nenhuma):' sqlpasswd
 echo "mysql-server mysql-server/root_password password $sqlpasswd" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password $sqlpasswd" | debconf-set-selections
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
@@ -260,7 +257,7 @@ sed -i 's/ttt/'$sqluname'/g' /home/fos-streaming/fos/www/config.php
 
 }
 
-echo "FOS-Streaming is installing, you need to wait till the installation gets finished"
+echo "Xtream Panel está sendo instalado, você precisa esperar até que a instalação seja concluída"
 
 fosstreamingexist
 distro

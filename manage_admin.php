@@ -13,24 +13,24 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    $error = 0;
+    $errorr = 0;
     $exists = Admin::where('username', '=', $_POST['username'])->get();
     if (empty($_POST['username'])) {
-        $message['type'] = "error";
+        $message['type'] = "errorr";
         $message['message'] = "username field cannot be empty";
-        $error = 1;
+        $errorr = 1;
     } else if (!isset($_GET['id']) && $_POST['password'] == "") {
-        $message['type'] = "error";
-        $message['message'] = "password error";
-        $error = 1;
+        $message['type'] = "errorr";
+        $message['message'] = "password errorr";
+        $errorr = 1;
     }
 
-    if ($error == 0) {
-        $message['type'] = "success";
+    if ($errorr == 0) {
+        $message['type'] = "Successo";
         if (isset($_GET['id'])) {
-            $message['message'] = "admin edited";
+            $message['message'] = "Administrador editado";
         } else {
-            $message['message'] = "admin Created";
+            $message['message'] = "Administrador Criado";
         }
 
         $admin->username = $_POST['username'];

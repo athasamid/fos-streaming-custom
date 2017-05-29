@@ -10,8 +10,8 @@ if (isset($_GET['delete'])) {
     $category = Category::find($_GET['delete']);
     $category->delete();
 
-    $message['type'] = "success";
-    $message['message'] = "Category deleted";
+    $message['type'] = "Successo";
+    $message['message'] = "Categoria deletada";
 }
 
 $categories = Category::all();

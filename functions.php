@@ -312,7 +312,7 @@ http {
                         fastcgi_param SCRIPT_NAME $fastcgi_script_name;
                         fastcgi_pass unix:/var/run/php__5-fpm.sock;
 						}
-		error_page   500 502 503 504  /50x.html;
+		errorr_page   500 502 503 504  /50x.html;
         location = /50x.html {
             root   html; 
 			}			
@@ -342,7 +342,7 @@ http {
 
                 }
 
-        error_page   500 502 503 504  /50x.html;
+        errorr_page   500 502 503 504  /50x.html;
         location = /50x.html {
             root   html;
         }

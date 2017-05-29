@@ -9,13 +9,13 @@ $message = [];
 if (isset($_GET['delete'])) {
     if ($_GET['delete'] == 1) {
         $message['type'] = "error";
-        $message['message'] = "You cannot remove the main admin account";
+        $message['message'] = "Não é possível remover a conta do administrador principal";
     } else {
         $admin = Admin::find($_GET['delete']);
         $admin->delete();
 
-        $message['type'] = "success";
-        $message['message'] = "Admin deleted";
+        $message['type'] = "Successo";
+        $message['message'] = "Administrador deletado com sucesso";
     }
 }
 

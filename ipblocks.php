@@ -10,8 +10,8 @@ if (isset($_GET['delete'])) {
     $ipblock = BlockedIp::find($_GET['delete']);
     $ipblock->delete();
 
-    $message['type'] = "success";
-    $message['message'] = "Admin deleted";
+    $message['type'] = "Success";
+    $message['message'] = "Administrador deletado";
 }
 
 $ipblocks = BlockedIp::all();

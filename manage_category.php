@@ -15,18 +15,18 @@ if (isset($_POST['submit'])) {
 
     $category->name = $_POST['name'];
     if (isset($_GET['id'])) {
-        $message['type'] = "success";
-        $message['message'] = "Category saved";
+        $message['type'] = "Successo";
+        $message['message'] = "Categoria salva";
         $category->save();
     } else {
         $exists = Category::where('name', '=', $_POST['name'])->get();
 
         if (count($exists) > 0) {
             $message['type'] = "error";
-            $message['message'] = "Categoryname already exists";
+            $message['message'] = "Nome da Categoria ja existe";
         } else {
-            $message['type'] = "success";
-            $message['message'] = "Category created";
+            $message['type'] = "Successo";
+            $message['message'] = "Categoria criada";
             $category->save();
             redirect("manage_category.php?id=" . $category->id, 2000);
         }

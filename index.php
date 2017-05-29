@@ -4,10 +4,10 @@ if (isset($_SESSION['user_id'])) {
     header("location: dashboard.php");
 }
 
-$error = '';
+$errorr = '';
 if (isset($_POST['submit'])) {
     if (empty($_POST['username']) || empty($_POST['password'])) {
-        $error = "Username or Password is invalid";
+        $errorr = "Username or Password is invalid";
     } else {
         $username = stripslashes($_POST['username']);
         $password = stripslashes($_POST['password']);
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
             header("location: dashboard.php");
         } else {
 
-            $error = "Usuario ou Senha incorreta";
+            $errorr = "Username or Password is invalid";
 
         }
     }
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -73,15 +73,15 @@ if (isset($_POST['submit'])) {
     <div id="wrapper">
         <div id="login" class="animate form">
             <?php
-            if ($error != "") {
-                echo "<div class=\"alert alert-error\">
-                                    " . $error . "
+            if ($errorr != "") {
+                echo "<div class=\"alert alert-errorr\">
+                                    " . $errorr . "
                                 </div>";
             }
             ?>
             <section class="login_content">
                 <form action="" method="post">
-                    <h1>FOS-Streaming</h1>
+                    <h1>Xtream Panel</h1>
                     <div>
                         <input type="text" name="username" class="form-control" placeholder="Usuario" required=""/>
                     </div>
@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Senha" required=""/>
                     </div>
                     <div>
-                        <input type="submit" name="submit" class="btn btn-default submit" value="Iniciar">
+                        <input type="submit" name="submit" class="btn btn-default submit" value="Entrar">
                     </div>
                     <div class="clearfix"></div>
                     <div class="separator">
@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
 
 
                             <p>&copy;2017 All Rights Reserved Xtream Panel by <a href="http://www.facebook.com/celiojr94"
-                                                                                  target="_blank">Célio Junior</a></p>
+                                                                                  target="_blank">Célio JR</a></p>
                         </div>
                     </div>
                 </form>

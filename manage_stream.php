@@ -28,31 +28,31 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($_POST['name'])) {
-        $message['type'] = "error";
-        $message['message'] = "Name field is empty";
+        $message['type'] = "errorr";
+        $message['message'] = "O campo Nome está vazio";
     }
     else if (empty($_POST['streamurl'])) {
-        $message['type'] = "error";
-        $message['message'] = "streamurl is empty";
+        $message['type'] = "errorr";
+        $message['message'] = "streamurl está vazia";
     }
     else if (empty($_POST['category'])) {
-        $message['type'] = "error";
-        $message['message'] = "Select one category";
+        $message['type'] = "errorr";
+        $message['message'] = "Selecione uma categoria";
     } else {
 
         if(isset($_GET['id'])) {
-            $message['type'] = "success";
-            $message['message'] = "Stream saved";
+            $message['type'] = "Sucesso";
+            $message['message'] = "Stream salva";
             $stream->save();
         } else {
             $exists = Stream::where('name', '=', $_POST['name'])->get();
 
             if(count($exists) > 0) {
-                $message['type'] = "error";
-                $message['message'] = "streamname already in use";
+                $message['type'] = "errorr";
+                $message['message'] = "streamname ja esta em uso";
             } else {
                 $message['type'] = "success";
-                $message['message'] = "Stream created";
+                $message['message'] = "Stream criada";
                 $stream->save();
                 redirect("manage_stream.php?id=" . $stream->id, 1000);
             }

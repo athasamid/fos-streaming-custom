@@ -12,7 +12,7 @@ $user = User::find($id);
 $setting = Setting::first();
 
 if (isset($_GET['e2'])) {
-    echo "#NAME FOS-Streaming \r\n";
+    echo "#NAME Xtream-Panel \r\n";
     foreach ($user->categories as $category) {
         foreach ($category->streams as $stream) {
             if ($stream->running == 1) {
