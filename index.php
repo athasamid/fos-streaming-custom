@@ -12,14 +12,14 @@ if (isset($_POST['submit'])) {
         $username = stripslashes($_POST['username']);
         $password = stripslashes($_POST['password']);
 
-        $userfind = Admin::where('username', '=', $username)->where('password', '=', md5($password))->count();
+        $userfind = Admin::where('usuario', '=', $username)->where('senha', '=', md5($password))->count();
 
         if ($userfind > 0) {
             $_SESSION['user_id'] = $username;
             header("location: dashboard.php");
         } else {
 
-            $error = "Username or Password is invalid";
+            $error = "Usuario ou Senha incorreta";
 
         }
     }
@@ -83,13 +83,13 @@ if (isset($_POST['submit'])) {
                 <form action="" method="post">
                     <h1>FOS-Streaming</h1>
                     <div>
-                        <input type="text" name="username" class="form-control" placeholder="Username" required=""/>
+                        <input type="text" name="usuario" class="form-control" placeholder="Usuario" required=""/>
                     </div>
                     <div>
-                        <input type="password" name="password" class="form-control" placeholder="Password" required=""/>
+                        <input type="password" name="senha" class="form-control" placeholder="Senha" required=""/>
                     </div>
                     <div>
-                        <input type="submit" name="submit" class="btn btn-default submit" value="Log in">
+                        <input type="submit" name="submit" class="btn btn-default submit" value="Iniciar">
                     </div>
                     <div class="clearfix"></div>
                     <div class="separator">
