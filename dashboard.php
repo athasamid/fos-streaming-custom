@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by Tyfix 2015
+ * Created by Celio JR
  */
 include('config.php');
 logincheck();
