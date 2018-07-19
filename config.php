@@ -1,6 +1,6 @@
 <?php
 session_start();
-date_default_timezone_set('America/Chicago');
+date_default_timezone_set('Asia/Jakarta');
 
 require 'vendor/autoload.php';
 include('functions.php');
@@ -16,9 +16,9 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'xxx',
-    'username'  => 'ttt',
-    'password'  => 'zzz',
+    'database'  => 'iptv',
+    'username'  => 'iptv',
+    'password'  => '3eslZeYmelmrndXOwbs0PQuVYPn8se',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',

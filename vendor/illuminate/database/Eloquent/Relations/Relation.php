@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 abstract class Relation
 {
     use Macroable {
@@ -49,7 +52,7 @@ abstract class Relation
      *
      * @var array
      */
-    protected static $morphMap = [];
+    public static $morphMap = [];
 
     /**
      * Create a new relation instance.
@@ -141,15 +144,30 @@ abstract class Relation
     }
 
     /**
+     * Execute the query as a "select" statement.
+     *
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function get($columns = ['*'])
+    {
+        return $this->query->get($columns);
+    }
+
+    /**
      * Touch all of the related models for the relationship.
      *
      * @return void
      */
     public function touch()
     {
-        $column = $this->getRelated()->getUpdatedAtColumn();
+        $model = $this->getRelated();
 
-        $this->rawUpdate([$column => $this->getRelated()->freshTimestampString()]);
+        if (! $model::isIgnoringTouch()) {
+            $this->rawUpdate([
+                $model->getUpdatedAtColumn() => $model->freshTimestampString(),
+            ]);
+        }
     }
 
     /**
@@ -160,7 +178,7 @@ abstract class Relation
      */
     public function rawUpdate(array $attributes = [])
     {
-        return $this->query->update($attributes);
+        return $this->query->withoutGlobalScopes()->update($attributes);
     }
 
     /**
@@ -174,7 +192,7 @@ abstract class Relation
     {
         return $this->getRelationExistenceQuery(
             $query, $parentQuery, new Expression('count(*)')
-        );
+        )->setBindings([], 'select');
     }
 
     /**
@@ -301,7 +319,7 @@ abstract class Relation
 
         if (is_array($map)) {
             static::$morphMap = $merge && static::$morphMap
-                            ? array_merge(static::$morphMap, $map) : $map;
+                            ? $map + static::$morphMap : $map;
         }
 
         return static::$morphMap;
@@ -325,6 +343,17 @@ abstract class Relation
     }
 
     /**
+     * Get the model associated with a custom polymorphic type.
+     *
+     * @param  string  $alias
+     * @return string|null
+     */
+    public static function getMorphedModel($alias)
+    {
+        return self::$morphMap[$alias] ?? null;
+    }
+
+    /**
      * Handle dynamic method calls to the relationship.
      *
      * @param  string  $method
@@ -337,7 +366,7 @@ abstract class Relation
             return $this->macroCall($method, $parameters);
         }
 
-        $result = call_user_func_array([$this->query, $method], $parameters);
+        $result = $this->query->{$method}(...$parameters);
 
         if ($result === $this->query) {
             return $this;

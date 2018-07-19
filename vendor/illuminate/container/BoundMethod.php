@@ -2,6 +2,7 @@
 
 namespace Illuminate\Container;
 
+use Closure;
 use ReflectionMethod;
 use ReflectionFunction;
 use InvalidArgumentException;
@@ -71,7 +72,7 @@ class BoundMethod
     protected static function callBoundMethod($container, $callback, $default)
     {
         if (! is_array($callback)) {
-            return value($default);
+            return $default instanceof Closure ? $default() : $default;
         }
 
         // Here we need to turn the array callable into a Class@method string we can use to
@@ -83,7 +84,7 @@ class BoundMethod
             return $container->callMethodBinding($method, $callback[0]);
         }
 
-        return value($default);
+        return $default instanceof Closure ? $default() : $default;
     }
 
     /**
@@ -102,7 +103,7 @@ class BoundMethod
     /**
      * Get all dependencies for a given method.
      *
-     * @param  \Illuminate\Container\Container
+     * @param  \Illuminate\Container\Container  $container
      * @param  callable|string  $callback
      * @param  array  $parameters
      * @return array
@@ -151,6 +152,10 @@ class BoundMethod
             $dependencies[] = $parameters[$parameter->name];
 
             unset($parameters[$parameter->name]);
+        } elseif ($parameter->getClass() && array_key_exists($parameter->getClass()->name, $parameters)) {
+            $dependencies[] = $parameters[$parameter->getClass()->name];
+
+            unset($parameters[$parameter->getClass()->name]);
         } elseif ($parameter->getClass()) {
             $dependencies[] = $container->make($parameter->getClass()->name);
         } elseif ($parameter->isDefaultValueAvailable()) {

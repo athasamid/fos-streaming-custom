@@ -7,9 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInitd7c19318aeb827b282d69319510de682
 {
     public static $files = array (
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -22,7 +21,9 @@ class ComposerStaticInitd7c19318aeb827b282d69319510de682
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
             'Philo\\Blade\\' => 12,
         ),
         'I' => 
@@ -35,9 +36,9 @@ class ComposerStaticInitd7c19318aeb827b282d69319510de682
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
         ),
-        'C' => 
+        'D' => 
         array (
-            'Carbon\\' => 7,
+            'Doctrine\\Common\\Inflector\\' => 26,
         ),
     );
 
@@ -58,9 +59,17 @@ class ComposerStaticInitd7c19318aeb827b282d69319510de682
         array (
             0 => __DIR__ . '/..' . '/symfony/debug',
         ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'Philo\\Blade\\' => 
         array (
@@ -94,20 +103,14 @@ class ComposerStaticInitd7c19318aeb827b282d69319510de682
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
         ),
-        'Carbon\\' => 
+        'Doctrine\\Common\\Inflector\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'D' => 
-        array (
-            'Doctrine\\Common\\Inflector\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
-            ),
-        ),
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
     public static $classMap = array (
@@ -128,7 +131,7 @@ class ComposerStaticInitd7c19318aeb827b282d69319510de682
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd7c19318aeb827b282d69319510de682::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd7c19318aeb827b282d69319510de682::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd7c19318aeb827b282d69319510de682::$prefixesPsr0;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitd7c19318aeb827b282d69319510de682::$fallbackDirsPsr4;
             $loader->classMap = ComposerStaticInitd7c19318aeb827b282d69319510de682::$classMap;
 
         }, null, ClassLoader::class);
