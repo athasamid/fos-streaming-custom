@@ -66,8 +66,8 @@ foreach (Stream::where('restream', '=', 1)->where('running', '=', 1)->get() as $
     echo "Restream ".$stream->name;
     $stream->checker = 0;
     $checkstreamurl = shell_exec('/usr/bin/timeout 15s ' . $setting->ffprobe_path . ' -analyzeduration 10000000 -probesize 9000000 -i "' . $stream->streamurl . '" -v  quiet -print_format json -show_streams 2>&1');
+    echo $checkstreamurl;
     $streaminfo = (array)json_decode($checkstreamurl);
-    echo $streaminfo;
     if (count($streaminfo) > 0) {
         $stream->checker = 0;
     } else {
