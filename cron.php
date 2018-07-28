@@ -63,9 +63,11 @@ foreach (Stream::where('pid', '!=', 0)->where('running', '=', 1)->get() as $stre
     }
 }
 foreach (Stream::where('restream', '=', 1)->where('running', '=', 1)->get() as $stream) {
+    echo "Restream ".$stream->name;
     $stream->checker = 0;
     $checkstreamurl = shell_exec('/usr/bin/timeout 15s ' . $setting->ffprobe_path . ' -analyzeduration 10000000 -probesize 9000000 -i "' . $stream->streamurl . '" -v  quiet -print_format json -show_streams 2>&1');
     $streaminfo = (array)json_decode($checkstreamurl);
+    echo $streaminfo;
     if (count($streaminfo) > 0) {
         $stream->checker = 0;
     } else {
